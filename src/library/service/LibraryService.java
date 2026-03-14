@@ -11,14 +11,19 @@ public class LibraryService {
     //method to search book
     public Book searchBook(int id) {
         Book book = repository.searchBook(id);
-        if(book == null) throw new BookNotFoundException("Book with id " + id + " not found");
+        if(book == null) {
+            throw new BookNotFoundException("Book with id " + id + " not found");
+        }
         return book;
     }
 
     //method to borrow book
     public void lendBook(int id){
         Book book = searchBook(id);
-        if(book.getBorrowed()) throw new BookAlreadyBorrowed("Book with id " + id + " already borrowed");
+        if(book.getBorrowed()){
+            throw new BookAlreadyBorrowed("Book with id " + id + " already borrowed");
+        }
+        System.out.println("Borrowed book");
         book.setBorrowed(true);
     }
 

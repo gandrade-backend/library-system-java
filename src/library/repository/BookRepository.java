@@ -32,7 +32,7 @@ public class BookRepository {
     }
 
     //Book Listing
-    public void ListBooks() {
+    public void listBooks() {
         for(Book book : books){
             System.out.println("Id: " + book.getId() + "| Title: " + book.getTitle() + "| Author: " + book.getAuthor());
         }

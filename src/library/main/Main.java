@@ -4,6 +4,7 @@ import java.util.Scanner;
 import library.exception.BookAlreadyBorrowed;
 import library.exception.BookNotFoundException;
 import library.repository.BookRepository;
+import library.service.LibraryService;
 
 //Salvar livro livros.json
 
@@ -11,10 +12,13 @@ import library.repository.BookRepository;
 
 //Mexer no Id, gerar ele automaticamente
 
+//Mexer lendBook, se nao tiver nenhum para emprestar
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BookRepository repository = new BookRepository();
+        LibraryService service = new LibraryService();
 
         int option;
         do{
@@ -35,7 +39,8 @@ public class Main {
                     listBook(repository);
                     break;
                 case 3:
-                    borrowBook();
+                    listBook(repository);
+                    lendBook(service);
                     break;
                 case 4:
                     removeBook();
@@ -67,14 +72,16 @@ public class Main {
         scanner.close();
     }
     public static void listBook(BookRepository repository){
-        if(!repository.isEmpty()) repository.ListBooks();
+        if(!repository.isEmpty()) repository.listBooks();
         else System.out.println("The library is empty.");
     }
-    public static void borrowBook(){
+    public static void lendBook(LibraryService service){
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
         try{
-
+            service.lendBook(id);
         } catch(BookAlreadyBorrowed e){
-
+            System.out.println(e.getMessage());
         }
     }
     public static void removeBook(){
