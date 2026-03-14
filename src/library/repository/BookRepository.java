@@ -7,6 +7,10 @@ public class BookRepository {
     //ArrayList of Books
     private ArrayList<Book> books = new ArrayList<>();
 
+    public boolean isEmpty(){
+        return books.isEmpty();
+    }
+
     //Add Book
     public void addBook(int id, String title, String author) {
         books.add(new Book(id, title, author));
@@ -22,6 +26,7 @@ public class BookRepository {
         return null;
     }
 
+    //Incomplete
     public void removeBook(Book book){
         books.remove(book);
     }

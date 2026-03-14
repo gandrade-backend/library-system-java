@@ -3,14 +3,9 @@ import java.util.Scanner;
 
 import library.exception.BookAlreadyBorrowed;
 import library.exception.BookNotFoundException;
-
-//Testando commit
-//teste
+import library.repository.BookRepository;
 
 //Salvar livro livros.json
-
-//LivroNaoEncontradoException
-//LivroJaEmprestadoException
 
 //Try e Catch
 
@@ -19,6 +14,7 @@ import library.exception.BookNotFoundException;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        BookRepository repository = new BookRepository();
 
         int option;
         do{
@@ -33,10 +29,10 @@ public class Main {
 
             switch(option){
                 case 1:
-                    addBook();
+                    addBook(repository);
                     break;
                 case 2:
-                    listBook();
+                    listBook(repository);
                     break;
                 case 3:
                     borrowBook();
@@ -57,11 +53,22 @@ public class Main {
 
         scanner.close();
     }
-    public static void addBook(){
-        
+    public static void addBook(BookRepository repository){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Write the book ID: ");
+        int id = scanner.nextInt();
+        System.out.print("\nWrite the name of the book: ");
+        String name = scanner.nextLine();
+        System.out.print("\nWrite the author's name: ");
+        String author = scanner.nextLine();
+        repository.addBook(id, name, author);
+
+        scanner.close();
     }
-    public static void listBook(){
-        
+    public static void listBook(BookRepository repository){
+        if(!repository.isEmpty()) repository.ListBooks();
+        else System.out.println("The library is empty.");
     }
     public static void borrowBook(){
         try{
