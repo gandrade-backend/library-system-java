@@ -3,6 +3,8 @@ package library.repository;
 import java.util.ArrayList;
 import library.model.Book;
 
+//Salvar livro livros.json <- salvar o arraylist em um arquivo
+
 public class BookRepository {
     //ArrayList of Books
     private ArrayList<Book> books = new ArrayList<>();
